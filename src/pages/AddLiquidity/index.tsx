@@ -40,6 +40,7 @@ import { currencyId } from '../../utils/currencyId'
 import { PoolPriceBar } from './PoolPriceBar'
 import { useIsTransactionUnsupported } from 'hooks/Trades'
 import UnsupportedCurrencyFooter from 'components/swap/UnsupportedCurrencyFooter'
+import { useEffect } from 'react'
 
 export default function AddLiquidity({
   match: {
@@ -88,6 +89,7 @@ export default function AddLiquidity({
   const [attemptingTxn, setAttemptingTxn] = useState<boolean>(false) // clicked confirm
 
   // txn values
+ 
   const deadline = useTransactionDeadline() // custom from users settings
   const [allowedSlippage] = useUserSlippageTolerance() // custom from users
   const [txHash, setTxHash] = useState<string>('')
@@ -138,7 +140,7 @@ export default function AddLiquidity({
       [Field.CURRENCY_A]: calculateSlippageAmount(parsedAmountA, noLiquidity ? 0 : allowedSlippage)[0],
       [Field.CURRENCY_B]: calculateSlippageAmount(parsedAmountB, noLiquidity ? 0 : allowedSlippage)[0]
     }
-
+ 
     let estimate,
       method: (...args: any) => Promise<TransactionResponse>,
       args: Array<string | string[] | number>,
@@ -153,9 +155,14 @@ export default function AddLiquidity({
         amountsMin[tokenBIsETH ? Field.CURRENCY_A : Field.CURRENCY_B].toString(), // token min
         amountsMin[tokenBIsETH ? Field.CURRENCY_B : Field.CURRENCY_A].toString(), // eth min
         account,
-        deadline.toHexString()
-      ]
+      deadline.toHexString(),
+     // includeMessage ? '1' : '0' , // Encode boolean as '1' (true) or '0' (false)// Include the boolean message parameter
+    // isChecked ? 'true' : 'false' ,
+    addressmint
+     // bool ? '1' : '0'
+    ]
       value = BigNumber.from((tokenBIsETH ? parsedAmountB : parsedAmountA).raw.toString())
+      console.log(isChecked, "li")
     } else {
       estimate = router.estimateGas.addLiquidity
       method = router.addLiquidity
@@ -167,9 +174,14 @@ export default function AddLiquidity({
         amountsMin[Field.CURRENCY_A].toString(),
         amountsMin[Field.CURRENCY_B].toString(),
         account,
-        deadline.toHexString()
-      ]
+        deadline.toHexString(),
+        // includeMessage ? '1' : '0' , // Encode boolean as '1' (true) or '0' (false)// Include the boolean message parameter
+        // isChecked ? 'true' : 'false' ,
+       addressmint
+       // bool ? '1' : '0'
+       ]
       value = null
+      console.log(isChecked, "li")
     }
 
     setAttemptingTxn(true)
@@ -309,6 +321,41 @@ export default function AddLiquidity({
 
   const addIsUnsupported = useIsTransactionUnsupported(currencies?.CURRENCY_A, currencies?.CURRENCY_B)
 
+ // const [includeMessage, setIncludeMessage] = useState(false); // State to track the boolean message
+
+   const [addressmint, setaddressmint] = useState(0);
+  const [isChecked, setIsChecked] = useState(true);
+ // console.log(isChecked)
+  // console.log(isChecked  ? '1' : '0') // ? 'true' : 'false'
+  // console.log(isChecked  ? 'true' : 'false') 
+  const handleToggleChange = () => {
+    setIsChecked(!isChecked);
+  };
+
+  /* // Function to handle switch toggle
+  const handleSwitchToggle = () => {
+      setIncludeMessage((prevValue) => !prevValue); // Toggle the boolean value
+  }; */
+
+  useEffect(() => {
+    if (isChecked) {
+      setaddressmint(mintaddress);
+    } else {
+      setaddressmint(notmintaddress);
+    }
+  }, [isChecked]);
+  
+ const mintaddress= 100
+ const notmintaddress = 101
+/* if(isChecked == true) {
+  setaddressmint(mintaddress)
+}else{
+  setaddressmint(notmintaddress)
+} */
+
+
+// switch div style={{ margin: 'auto', padding: '20px', width: '55px', border: '1px solid lightgray', marginTop: '20px', borderRadius: '5px', background: 'white' }}
+
   return (
     <>
       <AppBody>
@@ -389,7 +436,66 @@ export default function AddLiquidity({
             />
             {currencies[Field.CURRENCY_A] && currencies[Field.CURRENCY_B] && pairState !== PairState.INVALID && (
               <>
-                <LightCard padding="0px" borderRadius={'20px'}>
+               
+            <div >
+      <input
+        type="checkbox"
+        name="toggle1"
+        style={{ opacity: '0', position: 'absolute' }}
+        className="mobileToggle"
+        id="toggle1"
+        checked={isChecked}
+        onChange={handleToggleChange}
+      />
+      <label
+        htmlFor="toggle1"
+        style={{
+          position: 'relative',
+          display: 'inline-block',
+          userSelect: 'none',
+          transition: '.4s ease',
+          height: '30px',
+          width: '50px',
+          border: '1px solid #e4e4e4',
+          borderRadius: '60px',
+        }}
+      >
+        <div
+          style={{
+            content: '""',
+            position: 'absolute',
+            display: 'block',
+            transition: '.2s cubic-bezier(.24, 0, .5, 1)',
+            height: '30px',
+            width: '51px',
+            top: '0',
+            left: '0',
+            borderRadius: '30px',
+            background: isChecked ? '#2ecc71' : 'whitesmoke',
+          }}
+        ></div>
+        <div
+          style={{
+            content: '""',
+            position: 'absolute',
+            display: 'block',
+            boxShadow: isChecked ? '0 0 0 1px hsla(0, 0%, 0%, 0.1), 0 4px 0px 0 hsla(0, 0%, 0%, .04), 0 4px 9px hsla(0, 0%, 0%, .13), 0 3px 3px hsla(0, 0%, 0%, .05)' : 'none',
+            transition: '.35s cubic-bezier(.54, 1.60, .5, 1)',
+            background: 'whitesmoke',
+            height: '28px',
+            width: '28px',
+            top: '1px',
+            left: isChecked ? '24px' : '0px',
+            borderRadius: '60px',
+          }}
+        ></div>
+      </label>
+      <h1>LOCK LP LIFE LONG</h1>
+    </div>
+
+
+
+            <LightCard padding="0px" borderRadius={'20px'}>
                   <RowBetween padding="1rem">
                     <TYPE.subHeader fontWeight={500} fontSize={14}>
                       {noLiquidity ? 'Initial prices' : 'Prices'} and pool share
