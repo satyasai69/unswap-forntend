@@ -3,6 +3,9 @@
   "description": "Uniswap Interface",
   "homepage": ".",
   "private": true,
+  "engines": {
+    "node": "16.20.2"
+  },
   "devDependencies": {
     "@ethersproject/experimental": "^5.0.1",
     "@popperjs/core": "^2.4.4",
