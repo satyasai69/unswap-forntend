@@ -3,13 +3,13 @@
   "name": "whooshswap",
   "icons": [
     {
-      "src": "./Whoosh-icon.jpg",
+      "src": "./kcb.jpeg ", 
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "./Whoosh-icon.jpg",
+      "src": "./kcb.jpeg ",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

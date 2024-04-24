@@ -6,8 +6,8 @@ import { darken } from 'polished'
 import { useTranslation } from 'react-i18next'
 
 import styled from 'styled-components'
-import LogoTest from '../../assets/images/whoosh-icon.jpg'
-import LogoDarkTest from '../../assets/images/whoosh-icon.jpg'
+import LogoTest from '../../assets/images/kcb.jpeg'
+import LogoDarkTest from '../../assets/images/kcb.jpeg'           // /whoosh-icon.jpg'
 //import Logo from '../../assets/svg/logo.svg'
 //import LogoDark from '../../assets/svg/logo_white.svg'
 import { useActiveWeb3React } from '../../hooks'
@@ -290,7 +290,8 @@ const NETWORK_LABELS: { [chainId in ChainId]?: string } = {
   [ChainId.GÖRLI]: 'Görli',
   [ChainId.KOVAN]: 'Kovan',
   [ChainId.TBNB]: "TBNB",
-  [ChainId.ETPOSCHAINTESTNET]: 'ETPOSCHAINTESTNET', 
+  [ChainId.KCB]: "KCB",  
+  [ChainId.ETPOSCHAINTESTNET]: 'ETPOSCHAINTESTNET',  
 }
 
 export default function Header() {

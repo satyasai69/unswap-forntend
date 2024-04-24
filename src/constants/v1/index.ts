@@ -1,7 +1,7 @@
 import { Interface } from '@ethersproject/abi'
 import { ChainId } from '@uniswap/sdk'
 import V1_EXCHANGE_ABI from './v1_exchange.json'
-import V1_FACTORY_ABI from './v1_factory.json'
+import V1_FACTORY_ABI from './v1_factory.json' 
 
 const V1_FACTORY_ADDRESSES: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: '0xc0a47dFe034B400B47bDaD5FecDa2621de6c4d95',
@@ -9,8 +9,9 @@ const V1_FACTORY_ADDRESSES: { [chainId in ChainId]: string } = {
   [ChainId.RINKEBY]: '0xf5D915570BC477f9B8D6C0E980aA81757A3AaC36',
   [ChainId.GÖRLI]: '0xb4525f7e08B205C8D578abf0CBf9E2f5fF97e3da' ,//'0x6Ce570d02D73d4c384b46135E87f8C592A8c86dA',
   [ChainId.KOVAN]: '0xD3E51Ef092B2845f10401a0159B2B96e8B6c3D30',
-  [ChainId.TBNB]: '0x685A6E0a93b7E21dc807748FE8b0E600D6E0F62A', 
-  [ChainId.ETPOSCHAINTESTNET]: '0xb4525f7e08B205C8D578abf0CBf9E2f5fF97e3da',
+  [ChainId.TBNB]: '0x3DcFf7FB34AAFF3e3C2257182279C1A3FeA98Fba', 
+  [ChainId.KCB]: "0x7D3558f8b27A98a16Ea370581216A351784DDeDA", 
+  [ChainId.ETPOSCHAINTESTNET]: '0xb4525f7e08B205C8D578abf0CBf9E2f5fF97e3da', 
 }
 
 const V1_FACTORY_INTERFACE = new Interface(V1_FACTORY_ABI)

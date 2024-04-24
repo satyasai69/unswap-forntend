@@ -196,7 +196,7 @@ export default function ClaimModal() {
             )}
             {attempting && claimSubmitted && !claimConfirmed && chainId && claimTxn?.hash && (
               <ExternalLink href={getEtherscanLink(chainId, claimTxn?.hash, 'transaction')} style={{ zIndex: 99 }}>
-                View transaction on etposchainscan
+                View transaction on scan.kbcfoundation.com
               </ExternalLink>
             )}
           </AutoColumn>

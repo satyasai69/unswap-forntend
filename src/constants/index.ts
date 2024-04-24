@@ -3,7 +3,7 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 
 import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
 
-export const ROUTER_ADDRESS = '0x685A6E0a93b7E21dc807748FE8b0E600D6E0F62A'//'0x9Bc88702a913c383032047e9cb0a9C9715A04903' 
+export const ROUTER_ADDRESS = '0x3DcFf7FB34AAFF3e3C2257182279C1A3FeA98Fba'//'0x9Bc88702a913c383032047e9cb0a9C9715A04903' 
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
@@ -38,9 +38,10 @@ export const UNI: { [chainId in ChainId]: Token } = {
   [ChainId.ROPSTEN]: new Token(ChainId.ROPSTEN, UNI_ADDRESS, 18, 'UNI', 'Uniswap'),
   [ChainId.GÖRLI]: new Token(ChainId.GÖRLI, UNI_ADDRESS, 18, 'UNI', 'Uniswap'),
   [ChainId.KOVAN]: new Token(ChainId.KOVAN, UNI_ADDRESS, 18, 'UNI', 'Uniswap'),
+  [ChainId.KCB]: new Token(ChainId.KCB, UNI_ADDRESS, 18, 'UNI', 'Uniswap'),  
   [ChainId.TBNB]: new Token(ChainId.TBNB, UNI_ADDRESS, 18, 'UNI', 'Uniswap'), 
   //[ChainId.NUSANTARA]: new Token(ChainId.NUSANTARA, UNI_ADDRESS, 18, 'UNI', 'Uniswap'),
-  [ChainId.ETPOSCHAINTESTNET]: new Token(ChainId.ETPOSCHAINTESTNET, UNI_ADDRESS, 18, 'UNI', 'Uniswap')
+  [ChainId.ETPOSCHAINTESTNET]: new Token(ChainId.ETPOSCHAINTESTNET, UNI_ADDRESS, 18, 'UNI', 'Uniswap') 
 
 }
 
@@ -63,8 +64,9 @@ const WETH_ONLY: ChainTokenList = {
   [ChainId.RINKEBY]: [WETH[ChainId.RINKEBY]],
   [ChainId.GÖRLI]: [WETH[ChainId.GÖRLI]],
   [ChainId.KOVAN]: [WETH[ChainId.KOVAN]],
-  [ChainId.TBNB]: [WETH[ChainId.TBNB]], 
- [ChainId.ETPOSCHAINTESTNET]: [WETH[ChainId.ETPOSCHAINTESTNET]],
+  [ChainId.TBNB]: [WETH[ChainId.TBNB]],  
+  [ChainId.KCB]: [WETH[ChainId.KCB]],  
+ [ChainId.ETPOSCHAINTESTNET]: [WETH[ChainId.ETPOSCHAINTESTNET]], 
 }
 
 

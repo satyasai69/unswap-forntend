@@ -133,7 +133,7 @@ export default function VoteModal({ isOpen, onDismiss, proposalId, support }: Vo
             </AutoColumn>
             {chainId && (
               <ExternalLink href={getEtherscanLink(chainId, hash, 'transaction')} style={{ marginLeft: '4px' }}>
-                <TYPE.subHeader>View transaction on etposchainscan</TYPE.subHeader>
+                <TYPE.subHeader>View transaction on scan.kbcfoundation.com</TYPE.subHeader>
               </ExternalLink>
             )}
           </AutoColumn>
