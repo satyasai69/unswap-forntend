@@ -82,7 +82,7 @@ export function activeListeningKeys(
  * @param chainId the current chain id
  * @param latestBlockNumber the latest block number
  */
-export function outdatedListeningKeys(
+ export function outdatedListeningKeys(
   callResults: AppState['multicall']['callResults'],
   listeningKeys: { [callKey: string]: number },
   chainId: number | undefined,
@@ -110,7 +110,7 @@ export function outdatedListeningKeys(
   })
 }
 
-export default function Updater(): null {
+export default function Updater(): null { 
   const dispatch = useDispatch<AppDispatch>()
   const state = useSelector<AppState, AppState['multicall']>(state => state.multicall)
   // wait for listeners to settle before triggering updates
@@ -131,6 +131,8 @@ export default function Updater(): null {
   const serializedOutdatedCallKeys = useMemo(() => JSON.stringify(unserializedOutdatedCallKeys.sort()), [
     unserializedOutdatedCallKeys
   ])
+
+
 
   useEffect(() => {
     if (!latestBlockNumber || !chainId || !multicallContract) return
@@ -156,11 +158,12 @@ export default function Updater(): null {
     cancellations.current = {
       blockNumber: latestBlockNumber,
       cancellations: chunkedCalls.map((chunk, index) => {
-        const { cancel, promise } = retry(() => fetchChunk(multicallContract, chunk, latestBlockNumber), {
-          n: Infinity,
-          minWait: 2500,
-          maxWait: 3500
-        })
+      
+        const { cancel, promise } = retry(() => fetchChunk(multicallContract, chunk, latestBlockNumber) , {
+          n: 1, //Infinity,
+          minWait: 600000000000000000 ,// 250000,
+          maxWait: 600000000000000000600000000000000000 //3500000
+        } ) 
         promise
           .then(({ results: returnData, blockNumber: fetchBlockNumber }) => {
             cancellations.current = { cancellations: [], blockNumber: latestBlockNumber }
@@ -196,10 +199,13 @@ export default function Updater(): null {
               })
             )
           })
-        return cancel
+         
+        return  cancel 
+        
+        
       })
     }
-  }, [chainId, multicallContract, dispatch, serializedOutdatedCallKeys, latestBlockNumber])
+  }, [chainId, multicallContract, dispatch, serializedOutdatedCallKeys, latestBlockNumber])  
 
   return null
-}
+} 

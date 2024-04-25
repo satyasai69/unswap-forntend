@@ -13,7 +13,7 @@ import App from './pages/App'
 import store from './state'
 import ApplicationUpdater from './state/application/updater'
 import ListsUpdater from './state/lists/updater'
-import MulticallUpdater from './state/multicall/updater'
+ import MulticallUpdater from './state/multicall/updater'
 import TransactionUpdater from './state/transactions/updater'
 import UserUpdater from './state/user/updater'
 import ThemeProvider, { FixedGlobalStyle, ThemedGlobalStyle } from './theme'
@@ -41,6 +41,7 @@ window.addEventListener('error', error => {
     fatal: true
   })
 })
+//  <MulticallUpdater /> 
 
 function Updaters() {
   return (
@@ -50,6 +51,7 @@ function Updaters() {
       <ApplicationUpdater />
       <TransactionUpdater />
       <MulticallUpdater />
+     
     </>
   )
 }
