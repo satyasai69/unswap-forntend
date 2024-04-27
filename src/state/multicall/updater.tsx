@@ -15,9 +15,10 @@ import {
   parseCallKey,
   updateMulticallResults
 } from './actions'
+// updateMulticallResults
 
 // chunk calls so we do not exceed the gas limit
-const CALL_CHUNK_SIZE = 500
+const CALL_CHUNK_SIZE = 5000
 
 /**
  * Fetches a chunk of calls, enforcing a minimum block number constraint
@@ -88,7 +89,7 @@ export function activeListeningKeys(
   chainId: number | undefined,
   latestBlockNumber: number | undefined
 ): string[] {
-  if (!chainId || !latestBlockNumber) return []
+  if (!chainId || !latestBlockNumber) return [] 
   const results = callResults[chainId]
   // no results at all, load everything
   if (!results) return Object.keys(listeningKeys)
@@ -162,17 +163,17 @@ export default function Updater(): null {
         const { cancel, promise } = retry(() => fetchChunk(multicallContract, chunk, latestBlockNumber) , {
           n: 1, //Infinity,
           minWait: 600000000000000000 ,// 250000,
-          maxWait: 600000000000000000600000000000000000 //3500000
+          maxWait: 600000000000000000600000000000000000  //3500000
         } ) 
         promise
           .then(({ results: returnData, blockNumber: fetchBlockNumber }) => {
             cancellations.current = { cancellations: [], blockNumber: latestBlockNumber }
 
             // accumulates the length of all previous indices
-            const firstCallKeyIndex = chunkedCalls.slice(0, index).reduce<number>((memo, curr) => memo + curr.length, 0)
-            const lastCallKeyIndex = firstCallKeyIndex + returnData.length
+          const firstCallKeyIndex = chunkedCalls.slice(0, index).reduce<number>((memo, curr) => memo + curr.length, 0)
+           const lastCallKeyIndex = firstCallKeyIndex + returnData.length
 
-            dispatch(
+           dispatch(
               updateMulticallResults({
                 chainId,
                 results: outdatedCallKeys
@@ -183,8 +184,8 @@ export default function Updater(): null {
                   }, {}),
                 blockNumber: fetchBlockNumber
               })
-            )
-          })
+            ) 
+          }) 
           .catch((error: any) => {
             if (error instanceof CancelledError) {
               console.debug('Cancelled fetch for blockNumber', latestBlockNumber)
