@@ -161,9 +161,9 @@ export default function Updater(): null {
       cancellations: chunkedCalls.map((chunk, index) => {
       
         const { cancel, promise } = retry(() => fetchChunk(multicallContract, chunk, latestBlockNumber) , {
-          n: 1, //Infinity,
-          minWait: 600000000000000000 ,// 250000,
-          maxWait: 600000000000000000600000000000000000  //3500000
+          n: Infinity,
+          minWait: 600000000000000 ,// 250000,
+          maxWait: 6000000000000000  //3500000
         } ) 
         promise
           .then(({ results: returnData, blockNumber: fetchBlockNumber }) => {
@@ -191,8 +191,8 @@ export default function Updater(): null {
               console.debug('Cancelled fetch for blockNumber', latestBlockNumber)
               return
             }
-            console.error('Failed to fetch multicall chunk', chunk, chainId, error)
-            dispatch(
+            console.error('Failed to fetch multicall chunk hello', chunk, chainId, error)
+            dispatch( 
               errorFetchingMulticallResults({
                 calls: chunk,
                 chainId,
